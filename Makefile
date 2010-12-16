@@ -1,5 +1,5 @@
 all:
-	gcc 4.c 
+	gcc pp.c 
 	./a.out
 clean:
 	rm *.out 
