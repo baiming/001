@@ -1,7 +1,5 @@
-//--------------Struct----------------------
-#include <stdio.h>
-int ff(void)
-{
+/*//int ff(void)
+//{
 char q='*';
 printf("%c\n",q);
 }
@@ -75,7 +73,7 @@ int main(int argc, const char *argv[])
     printf("%d\n",*(q+2));
     return 0;
 }
-//------using FanDiao function played * squar---------
+//------using HuiDiao function played * squar---------
 #include <stdio.h>
 void kkk (void)
 {
@@ -146,4 +144,38 @@ int main(int argc, const char *argv[])
     printf("%d\n",*((char *)ret));
     return 0;
     }
-
+//---------*/
+#include <stdio.h>
+struct p_p{
+int id;int out;};
+int main(int argc, const char *argv[])
+{   
+    int i=0;int j=0;int m=0;
+    struct p_p p0[10];
+    for(i=0;i<10;i++)
+    {  
+        p0[i].id=i+1;
+        p0[i].out=0;
+    }
+        
+    for(i=0;i<10;i++)
+    {
+            for(; ;)
+            {
+                if(p0[m].out==0)
+                    j++;
+     
+                if(j==3)
+                {
+                    p0[m].out=1; 
+                     j=0;
+                      printf("%d %d\n",p0[m].id,p0[m].out);
+                      break;
+                }
+            
+            m++;    
+            m=m%10;
+           }
+            }
+    return 0;
+}
