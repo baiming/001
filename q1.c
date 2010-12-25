@@ -17,26 +17,29 @@ int main(int argc, const char *argv[])
 }*/
 //-------------------
 #include <stdio.h>
-int len_h ;
+int len_h=0;
 char *max_ (char *a) 
 {   
-    int i;char* i_max;int w;
+    int i=0;char* i_max;int w=0;
     for(i= 0;a[i]!= '\0';i++)
    {  
         if(a[i] != a[i+1])
         {   
-            i_max= i_max;
-            len_h= ++w;
+        if(++w>len_h)
+        {
+            len_h=w;
+            i_max=&a[i+1-len_h];
+         }
             w= 0;
         }    
             if(a[i] == a[i+1])
             {   
                 w++;
-                if(++w > len_h)
-                    {
-                        i_max= &a[i];
-                        len_h= w;
-                    }   
+          //      if(++w > len_h)
+            //    {
+                 
+               // len_h= w;
+             //   }   
             }    
        
     }      
@@ -46,10 +49,12 @@ char *max_ (char *a)
 int main(int argc, const char *argv[])
 {
     int p;
-    char* a="aa";
+    char* a="dddaadfffffdddeeefrfff";
+    char *q;
+    q=max_(a);
     for (p = 0; p < len_h; p++) 
     {
-        printf("%c",*(max_(a)+p));
+        printf("%c",*(q+p));
         }
     printf("\n");
     return 0;
