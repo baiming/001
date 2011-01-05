@@ -3,33 +3,48 @@
 #include <string.h>
 struct stu {
 int id;char name[20];float chi;float mas;float pi;struct stu *next;};
-struct stu * tt_1(struct stu*k,FILE*s ,int l)
+struct stu *list(struct stu*q,int id,char *name,float chi,float mas, float pi)
 {
-    struct stu*p;
-    int i=0;
-    p=malloc(sizeof(int)*100);
-    fscanf(s," %d: %d %5s %5f   %5f    %5f\n",&l,&p->id,p->name,&p->chi,&p->mas,&p->pi);
-    fprintf(stdout," %d: %d %5s %5.1f   %5.1f    %5.1f\n",l,p->id,p->name,p->chi,p->mas,p->pi);
-    i++;
-    p->next=k;
-    return p;
+    q->next=malloc(sizeof(struct stu)*100);
+    q=q->next;
+    q->next=NULL;
+    q->id=id;
+    strcpy(q->name,name);
+    q->chi=chi;
+    q->mas=mas;
+    q->pi=pi;
+    return q;
+}
+struct stu * tt_1(FILE*s)
+{
+    struct stu p,*head,*q;
+    head=malloc(sizeof(struct stu)*100);
+    fscanf(s," %d %5s %5f   %5f    %5f\n",&p.id,p.name,&p.chi,&p.mas,&p.pi);
+    head->id=p.id;
+    strcpy(head->name,p.name);
+    head->chi=p.chi;
+    head->mas=p.mas;
+    head->pi=p.pi;
+    q=head;
+    while(!feof(s))
+    {
+        fscanf(s," %d %5s %5f   %5f    %5f\n",&p.id,p.name,&p.chi,&p.mas,&p.pi);
+        q=list(q,p.id,p.name,p.chi,p.mas,p.pi);
+    }
+        return head;
 }    
-/*struct stu * add(int a,char b,float c,float d,float e)
+struct stu * add(int id,char *name,float chi,float mas,float pi)
 {
     struct stu*p;
-    //int i=0;
     p=malloc(sizeof(int)*100);
     p->id=id;
-    trycpy(p->name,name);
+    strcpy(p->name,name);
     p->chi=chi;
     p->mas=mas;
     p->pi=pi;
-    //fscanf(s," %d: %d %5s %5f   %5f    %5f\n",l,&p->id,p->name,&p->chi,&p->mas,&p->pi);
-    //fprintf(stdout," %d: %d %5s %5.1f   %5.1f    %5.1f\n",l[i],p->id,p->name,p->chi,p->mas,p->pi);
-    //i++;
     p->next=NULL;
     return p;
-} */   
+} 
 /*struct stu *t0(struct stu*l)
 {    struct stu *k,*h;
     h=l;
@@ -66,7 +81,7 @@ struct stu * tt_1(struct stu*k,FILE*s ,int l)
  {
      struct stu*i,*j;
      i=b;
-     if(k->pi < i->pi)
+     if(k->pi <= i->pi)
      {
          k->next=i;
          return k;
@@ -74,7 +89,7 @@ struct stu * tt_1(struct stu*k,FILE*s ,int l)
      j=i;i=i->next;
      while(i!=NULL)
      {
-        if(k->pi < i->pi)
+        if(k->pi <= i->pi)
         {
             break;
         }
@@ -98,7 +113,6 @@ struct stu * tt_1(struct stu*k,FILE*s ,int l)
      struct stu*b,*c,*d,*q;int r;
      c=t0->next;
      t0->next=NULL;
-     printf("%d\n",t0->id);
      while(c!=NULL)
      {
         d=c->next;
@@ -109,20 +123,35 @@ struct stu * tt_1(struct stu*k,FILE*s ,int l)
             r=1;
             while(q != NULL)
             {
-                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,q->id,q->name,q->chi,q->mas,q->pi);
-                r++;
-                q=q->next;
+                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,q->id,q->name,q->chi,q->mas,q->pi); r++; q=q->next;
             }
+ }
+ void delete (FILE*s,int id)
+ {
+    struct stu *head,*p;
+    if(head->id==id)
+    {
+        p=head;
+        head=head->next;
+        int r=1;
+        while(head!=EOF)
+        {
+                        
+                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,head->id,head->name,head->chi,head->mas,head->pi); 
+                r++;
+                head=head->next;
+        }
+        
+    }    
  }
  int main(int argc, const char *argv[])
  {
     int w,a;int t=7;
-    char b;
+    int b;
     float c,d,e,f;
-    int cc=7;
-    struct stu*q,*t0,*p;
+    struct stu*q,*t0,*p,*h;
     FILE*s;
-    int i=0;int j=0;int h=1;
+    int i=0;int j=0;
     struct stu *x;
     struct stu m[]={
     {1,"ddd",20.0,30.0,25.0},
@@ -133,6 +162,13 @@ struct stu * tt_1(struct stu*k,FILE*s ,int l)
     {6,"www",12.0,12.0,12.0},
     {7,"xyz",20.0,30.0,25.0}};
     int r=1;
+    char bu[300]={0};
+        s=fopen("1.txt","w");
+        for(i=0;i<t;i++)
+            {
+              fprintf(s," %d %5s %5.1f   %5.1f    %5.1f\n",m[i].id,m[i].name,m[i].chi,m[i].mas,m[i].pi); 
+              
+            };
     while(1)
     {
         printf("Please select the option:\n");
@@ -146,40 +182,42 @@ struct stu * tt_1(struct stu*k,FILE*s ,int l)
         getchar();
         printf("seq ID NAME CHGRADE MATHGRADE AVERAGE\n");
         printf("------------------------------------------\n");
-        s=fopen("1.txt","w");
-        for(i=0;i<t;i++)
-            {
-              fprintf(s," %d: %d %5s %5.1f   %5.1f    %5.1f\n",r,m[i].id,m[i].name,m[i].chi,m[i].mas,m[i].pi); 
-              r++;
-            };
+        if(w==1)  
+        { 
             fclose(s);
             s=fopen("1.txt","r");
-            i=0;
-         if(w==1)  
-         { 
-            p=tt_1(NULL,s,r);
-            for(i=0;i<t-1;i++)
-                {
-                    p=tt_1(p,s,r);
-                }
+            while(fgets(bu,300,s))
+            {
+                printf(" %d: %s\n",r,bu);
+                r++;
+            }
             printf("-----------------------------------------\n");
-         }   
+        }   
         if(w==2)
         {
+            fclose(s);
+            s=fopen("1.txt","r");
+            p=tt_1(s);
             t0=p;
-            t0=aa(t0);
+            aa(t0);
+            printf("%d",p->id);
         }
         if(w==3)
         {
+            int a1;char *a2;
+            float a3,a4,a5;
             fclose(s);
             struct stu *x;
-            x=malloc(sizeof(int)*100);
+            x=malloc(sizeof(struct stu)*100);
             printf("Please input the new info(ID name chgrade mathgrade average):\n");
             printf("ID shuould more than 7\n");
-            s=fopen("1.txt","a");
-            fscanf(stdout," %d %5s %5.1f   %5.1f   %5.1f",&x->id,x->name,&x->chi,&x->mas,&x->pi);
+            s=fopen("1.txt","a+");
+            fscanf(stdin," %d%s%f%f%f",&x->id,x->name,&x->chi,&x->mas,&x->pi);
+            getchar();
             fprintf(s," %d %5s %5.1f   %5.1f   %5.1f",x->id,x->name,x->chi,x->mas,x->pi);
-            //fflush(s);
+            t++;
+            r=1;
+            fflush(s);
         }
         if(w==4)
         {
@@ -191,7 +229,9 @@ struct stu * tt_1(struct stu*k,FILE*s ,int l)
             scanf("%d\n",&a);
             printf("Your should choose the number include 1-8:\n");
             scanf("%d\n",&b);
+            //h=delete(s,b);
             printf("selunm = %d\n",b);
+            delete(s,b);
         }
         if(w==5)
         break;
