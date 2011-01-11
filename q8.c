@@ -45,69 +45,37 @@ struct stu * add(int id,char *name,float chi,float mas,float pi)
     p->next=NULL;
     return p;
 } 
-/*struct stu *t0(struct stu*l)
-{    struct stu *k,*h;
-    h=l;
-    //k=malloc(sizeof(int)*20);
-    while(l->next!=NULL){
-    if(l->pi > l->next->pi)
+struct stu* bb(struct stu* b,struct stu* k)
+{
+    struct stu*i,*j;
+    i=b;
+    if(k->pi <= i->pi)
     {
+        k->next=i;
+        return k;
     }
-    if(l->pi < l->next->pi)
-
+    j=i;i=i->next;
+    while(i!=NULL)
     {
-
-        if(l->pi - h->pi>0)
-        {
-           l->next=h;
-
-        }
-        else{
-        while(l->pi - h->next->pi<0)
-        {
-            h=h->next;
-}
- 
-             l->next=h->next;h->next=l;
- 
-         }
-     }
-     l=l->next;
-     }
- //k->next=NULL;
-     return h;
-     }*/
- struct stu* bb(struct stu* b,struct stu* k)
- {
-     struct stu*i,*j;
-     i=b;
-     if(k->pi <= i->pi)
-     {
-         k->next=i;
-         return k;
-     }
-     j=i;i=i->next;
-     while(i!=NULL)
-     {
-        if(k->pi <= i->pi)
-        {
+       if(k->pi <= i->pi)
+       {
             break;
-        }
-        else
+       }
+       else
             j=i;i=i->next;
-     }
-     if(i)
-     {
+    }
+    if(i)
+    {
         k->next=i;
         j->next=k;
-     }
+    }
         else
-     {
+    {
         k->next=NULL;
         j->next=k;
-     }
+    }
      return b;
- }
+}
  struct stu* aa(struct stu*t0)
  {
      struct stu*b,*c,*d,*q;int r;
@@ -126,30 +94,96 @@ struct stu * add(int id,char *name,float chi,float mas,float pi)
                 printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,q->id,q->name,q->chi,q->mas,q->pi); r++; q=q->next;
             }
  }
- void delete (FILE*s,int id)
+ void delete_id (struct stu*head,int t)
  {
-    struct stu *head,*p;
-    if(head->id==id)
+    int r=1;
+    int b;
+    int i=1;
+    struct stu*p,*q;
+    p=head;
+    q=p;
+    printf("Your should choose the number include 1-%d:",t);
+    scanf("%d",&b);
+    printf("selunm = %d\n",b);
+    if(b==1)
     {
-        p=head;
-        head=head->next;
-        int r=1;
-        while(head!=EOF)
+        //printf("Your should choose the number include 1-%d:",t);
+        //scanf("%d",&b);
+        //printf("selunm = %d\n",b);
+        p=head->next;
+        while(p!=NULL)
         {
-                        
-                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,head->id,head->name,head->chi,head->mas,head->pi); 
+                                 
+                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,p->id,p->name,p->chi,p->mas,p->pi); 
                 r++;
-                head=head->next;
+                p=p->next;
         }
         
+    }else{
+    while(p!=NULL)
+    {
+        i++;
+        if(i == b)
+        {
+            p->next=p->next->next;
+        }    
+        p=p->next;
     }    
+    //printf("Your should choose the number include 1-%d:",t);
+    //scanf("%d",&b);
+    //printf("selunm = %d\n",b);
+        while(q!=NULL)
+        {
+                        
+                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,q->id,q->name,q->chi,q->mas,q->pi); 
+                r++;
+                q=q->next;
+        }
+    }   
+ }
+ void delete_name (struct stu*head,int h)
+ {
+    int r=1;
+    int i=1;
+    struct stu*p,*q;
+    p=head;
+    q=p;
+    if(h==1)
+    {
+        p=head->next;
+        while(p!=NULL)
+        {
+                        
+                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,p->id,p->name,p->chi,p->mas,p->pi); 
+                r++;
+                p=p->next;
+        }
+        
+    }else{
+    while(p!=NULL)
+    {
+        i++;
+        if(i == h)
+        {
+            p->next=p->next->next;
+        }    
+        p=p->next;
+    }    
+        while(q!=NULL)
+        {
+                        
+                printf(" %d: %d %5s %5.1f   %5.1f   %5.1f\n",r,q->id,q->name,q->chi,q->mas,q->pi); 
+                r++;
+                q=q->next;
+        }
+    }   
  }
  int main(int argc, const char *argv[])
  {
     int w,a;int t=7;
     int b;
     float c,d,e,f;
-    struct stu*q,*t0,*p,*h;
+    struct stu*q,*t0,*p,*t1;
     FILE*s;
     int i=0;int j=0;
     struct stu *x;
@@ -169,6 +203,9 @@ struct stu * add(int id,char *name,float chi,float mas,float pi)
               fprintf(s," %d %5s %5.1f   %5.1f    %5.1f\n",m[i].id,m[i].name,m[i].chi,m[i].mas,m[i].pi); 
               
             };
+            fclose(s);
+            s=fopen("1.txt","r");
+            t1=tt_1(s);        
     while(1)
     {
         printf("Please select the option:\n");
@@ -204,19 +241,17 @@ struct stu * add(int id,char *name,float chi,float mas,float pi)
         }
         if(w==3)
         {
-            int a1;char *a2;
-            float a3,a4,a5;
-            fclose(s);
             struct stu *x;
+            fclose(s);
             x=malloc(sizeof(struct stu)*100);
             printf("Please input the new info(ID name chgrade mathgrade average):\n");
             printf("ID shuould more than 7\n");
             s=fopen("1.txt","a+");
             fscanf(stdin," %d%s%f%f%f",&x->id,x->name,&x->chi,&x->mas,&x->pi);
             getchar();
-            fprintf(s," %d %5s %5.1f   %5.1f   %5.1f",x->id,x->name,x->chi,x->mas,x->pi);
+            fprintf(s," %d %5s %5.1f   %5.1f    %5.1f",x->id,x->name,x->chi,x->mas,x->pi);
             t++;
-            r=1;
+            
             fflush(s);
         }
         if(w==4)
@@ -224,14 +259,24 @@ struct stu * add(int id,char *name,float chi,float mas,float pi)
             printf("please choose the way:\n");
             printf("1.Delete by ID\n");
             printf("2.Delete by name\n");
-            printf("Exit\n");
+            printf("3.Exit\n");
             printf("Your choice:");
-            scanf("%d\n",&a);
-            printf("Your should choose the number include 1-8:\n");
-            scanf("%d\n",&b);
-            //h=delete(s,b);
-            printf("selunm = %d\n",b);
-            delete(s,b);
+            scanf("%d",&a);
+            if(a == 3)
+            continue;
+            if(a>3)
+            {
+                printf("wrong");
+                continue;
+            }
+            //printf("Your should choose the number include 1-%d:",t);
+            //scanf("%d",&b);
+            //printf("selunm = %d\n",b);
+            //printf("r = %d\n",r);
+            if(a == 1)
+            delete_id(t1,t);
+            if(a == 2)
+            delete_name(t1,t);
         }
         if(w==5)
         break;
