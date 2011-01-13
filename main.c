@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -51,39 +52,60 @@ void scan_scr(void)
 {
     int i = 0;
     int j = 0;
-
+    int w = 30;
     u32_t *p = fb_v.fb_mem;
-
-    //for(i=0; i<fb_v.h;i++)
-    //{
-        i = 200;
-        for(j=0; j<fb_v.w; j++)
+    for(i=1;i<26;i++)
+    { 
+        for(j=0; j < (fb_v.w-124); j++)
         {
-            p[i*fb_v.w+j] = 0x000000ff;    // da yin yi hang
+            p[w*i*fb_v.w+j] = 0x000000ff;    // da yin yi hang
         }
-        j=512;
-        for(i=0; i<fb_v.h; i++)
+    }
+
+
+
+    for(j=1;j<32;j++)
+    {
+        for(i=0; i < fb_v.h-48; i++)
         {
-            //p[i*fb_v.w+400]= 0x00ff0000;  // da yin yi lie
-            fb_one_pixel(j,i,0x00ff0000);
+            
+            p[j*w+i*fb_v.w]= 0x00ff0000;  // da yin yi lie
             //usleep(20);
         }
-        for(i=0; i<fb_v.h; i++)
+    }
+
+
+
+        /*for(i=0; i<fb_v.h; i++)       //xu  xian
         {
             p[i*fb_v.h+400]= 0x00ff0000;
-        }
+        //}*/
         //}
-        
+         
 }
 int main(int argc, const char *argv[])
 {
     int i=0;
     create_scr_fb();
+
+    //fb_circle(500, 350, 200, 0x000000ff);
     //scan_scr();
-    for(i=0;i<400;i++)
+   for(i=0;i<910;i++)
     {
-        fb_line(0,10+i,1023,500,0x00ff0000+i);  //hua xian han shu
-        usleep(50);
-    }    
+        fb_line(80+i,20,80+i,750,0x00ac899c);  //hua xian han shu
+        //usleep(50);
+    }
+   print_board();
+    mouse_doing();
+
+   /*while(1)
+   {
+    draw_cursor(550,333);
+    restore_shape(100,40);
+    //sleep(1);
+    //draw_cursor(100,222);
+    //restore_shape(100,222);
+   }*/
+
     return 0;
 }

@@ -141,14 +141,18 @@ struct stu* bb(struct stu* b,struct stu* k)
         }
     }   
  }
- void delete_name (struct stu*head,int h)
+ void delete_name (struct stu*head,int t)
  {
     int r=1;
     int i=1;
+    int b;
     struct stu*p,*q;
     p=head;
     q=p;
-    if(h==1)
+    printf("Your should choose the number include 1-%d:",t);
+    scanf("%d",&b);
+    printf("selunm = %d\n",b);
+    if(b==1)
     {
         p=head->next;
         while(p!=NULL)
@@ -163,7 +167,7 @@ struct stu* bb(struct stu* b,struct stu* k)
     while(p!=NULL)
     {
         i++;
-        if(i == h)
+        if(i == b)
         {
             p->next=p->next->next;
         }    
