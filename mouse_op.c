@@ -42,8 +42,8 @@
 
 };
 static u32_t shape_save[C_WIDTH*C_HEIGHT];
-
-char who = 1;
+ u32_t color_choice;
+ char w = 1 ;
 char board[V_NUM*P_NUM];
 /*int paduan(int x,int y,int p)
 {
@@ -62,6 +62,33 @@ char board[V_NUM*P_NUM];
         w2=y;
         return x;
     }    
+
+}*/
+
+/*int choose_color(int x ,int y)
+{
+    if((x>=20) && (x>=60))
+    {
+        if((y>=40) && (y<=80))
+        {
+            color_choice = 0x000000ff;
+            who = 1;
+        }
+        else if((y>=120) && (y<=160))
+        {
+            color_choice = 0x00ff0000;
+            who = 2;
+        }
+    
+    }
+
+    return 0;
+}*/
+
+/*int print_one_chess(int x, int y)
+{
+    
+
 
 }*/
 
@@ -130,7 +157,7 @@ int get_m_info(int fd,m_event *event)
     return n;
 }
 
-int chess_count(int x, int y)
+int chess_count(int x, int y,int w)
 {
     int i = x;
     int j = y;
@@ -146,42 +173,77 @@ int chess_count(int x, int y)
     {
         j++;
     }
-    board[i+j*V_NUM] = who;
+    board[i+j*V_NUM] = w;
    
     return 0;
 
 
 }
 
+/*int print_two_chess(int x, int y,int p)
+{
+    int c_x = x;
+    int c_y = y;
+    //int p=0;
+    if((x < 100) || (x > (30*29+100)))
+    {
+        choose_color(x,y);
+        return 1;
+    
+    }
+    if((y <40) || (y > (30*23+40)))
+    {
+        choose_color(x,y);
+        return 1;
+    
+    }
+
+    x = (x-100)%30;
+    y = (y-40)%30;
+
+    print_one_chess(x,y,p);
+    return 0;
+}*/
 
 
 int check_five(int x, int y)
 {
     int i = 0;
+    int j =0;
     char counter = 0;
     char storage = 0;
+    char nx = 0;
+    char ny = 0;
+    char n_x[4]= {0,1,1,1};
+    char n_y[4]= {1,0,1,-1};
 
     storage = board[x+y*V_NUM];
     if(storage == 0)
     {
         return 0;
     }
-    counter = 1;
-
-    for(i =1; i<5; i++)
+    for(j=0;j<4;j++)
     {
-        if(board[x+i+(y+i)*V_NUM] == storage)
+        counter = 1;
+        nx = x;
+        ny = y;
+        for(i=1; i<5; i++)
         {
-            counter++;
+            nx += n_x[j];
+            ny += n_y[j];
+            if(board[nx+ny*V_NUM] == storage)
+            {
+                counter++;
+            }
+            else
+            {
+                break;
+            }
         }
-        else
+        if(counter == 5)
         {
-            break;
+            return storage;
         }
-    }
-    if(counter == 5)
-    {
-        return storage;
     }
     return 0;
 
@@ -198,7 +260,7 @@ int check_all(void)
         {
             if(check_five(i,j) != 0)
             {
-                printf("%d won!\n", who);
+                printf("%d won!\n", w);
                 return 1;
             
             }
@@ -225,7 +287,7 @@ int mouse_doing(void)
         perror("open");
         exit(1);
     }
-
+    printf("sdsdsd\n");
     draw_cursor(mx, my);
     
     while(1)
@@ -251,11 +313,19 @@ int mouse_doing(void)
             }
             switch(mevent.button)
             {
-                case 1 : print_one_chess(mx, my,p);
+                case 1 :
+                         restore_shape (mx,my);
+                        w= print_one_chess(mx, my,p) ;
+
+                         
+                            chess_count(mx,my,w);
+                            printf("%d\n",w);
+                            check_all();
+                         
                          save_shape(mx ,my);
-                         chess_count(mx,my);
-                         check_all();
-                         //p++;
+
+
+                         p++;
                          break;
                 case 2 : break;
                 case 4 : break;
@@ -263,8 +333,6 @@ int mouse_doing(void)
             
             }
             draw_cursor(mx ,my);
-
-
         }
         usleep(1000);
 

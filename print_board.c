@@ -74,7 +74,7 @@ else {
                           }
                  }
 } */
-
+extern char w;
 int paduan(int x,int y,int p)
 {
     int w1;int w2;
@@ -97,12 +97,11 @@ int paduan(int x,int y,int p)
 
 
 
-void print_one_chess (int mx,int my,int q)
+int print_one_chess (int mx,int my,int q)
 {
     int i=0;
     int c=0;
     int x,y;
-    int p=q;
     int t;
             x=STARTING_X;
             y=STARTING_Y;
@@ -131,7 +130,7 @@ void print_one_chess (int mx,int my,int q)
                         {
                            //  yuan(a,b,10,0x00ffffff);
                            //fb_one_pixel(mx,my,0x000000ff);
-                         /*   for(h=10.0;h>0;h-=0.01)
+                           /* for(h=10.0;h>0;h-=0.01)
                             {
                                 circle(a, b,h,0x00ffffff, 0);
                             }*/
@@ -156,7 +155,8 @@ void print_one_chess (int mx,int my,int q)
                 break;
              } 
 
-            //}    
+            w = q%2;
+            return w;
 }  
 
 void print_board(void)  //ge zi
