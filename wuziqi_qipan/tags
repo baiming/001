@@ -1,0 +1,58 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BORD	mouse_op.c	11;"	d	file:
+C_HEIGHT	mouse_op.c	15;"	d	file:
+C_HEIGHT	mouse_op.c	9;"	d	file:
+C_WIDTH	mouse_op.c	14;"	d	file:
+C_WIDTH	mouse_op.c	8;"	d	file:
+P_NUM	main.h	4;"	d
+SPACE	mouse_op.c	17;"	d	file:
+SPACE	print_board.c	6;"	d	file:
+STARTING_X	mouse_op.c	18;"	d	file:
+STARTING_X	print_board.c	4;"	d	file:
+STARTING_Y	mouse_op.c	19;"	d	file:
+STARTING_Y	print_board.c	5;"	d	file:
+T__	mouse_op.c	10;"	d	file:
+V_NUM	main.h	3;"	d
+X__	mouse_op.c	12;"	d	file:
+_MAIN_H	main.h	2;"	d
+board	mouse_op.c	/^char board[V_NUM*P_NUM];$/;"	v
+bpp	main.h	/^    int bpp;$/;"	m	struct:__anon2
+button	main.h	/^    int button;$/;"	m	struct:__anon1
+check_all	mouse_op.c	/^int check_all(void)$/;"	f
+check_five	mouse_op.c	/^int check_five(int x, int y)$/;"	f
+chess_count	mouse_op.c	/^int chess_count(int x, int y)$/;"	f
+create_scr_fb	main.c	/^void create_scr_fb(void)$/;"	f
+cursor_pixel	mouse_op.c	/^    static u32_t cursor_pixel[C_WIDTH *C_HEIGHT]={$/;"	v	file:
+draw_cursor	mouse_op.c	/^int draw_cursor(int x, int y)$/;"	f
+dx	main.h	/^    int dx;$/;"	m	struct:__anon1
+dy	main.h	/^    int dy;$/;"	m	struct:__anon1
+dz	main.h	/^    int dz;$/;"	m	struct:__anon1
+fb_circle	basic_shape.c	/^int fb_circle(int x0, int y0, int r, u32_t color)    \/\/  hua yuan$/;"	f
+fb_line	basic_shape.c	/^int fb_line (int x1, int y1,int x2, int y2, u32_t color)    \/\/hua xian$/;"	f
+fb_mem	main.h	/^    void *fb_mem;$/;"	m	struct:__anon2
+fb_one_pixel	main.c	/^int fb_one_pixel(int x,int y,u32_t color)$/;"	f
+fb_v	main.h	/^v_info_t fb_v;$/;"	v
+get_m_info	mouse_op.c	/^int get_m_info(int fd,m_event *event)$/;"	f
+h	main.h	/^    int h;$/;"	m	struct:__anon2
+m_event	main.h	/^}m_event;$/;"	t	typeref:struct:__anon1
+main	main.c	/^int main(int argc, const char *argv[])$/;"	f
+mevent	main.h	/^m_event mevent;$/;"	v
+mouse_doing	mouse_op.c	/^int mouse_doing(void)$/;"	f
+paduan	print_board.c	/^int paduan(int x,int y,int p)$/;"	f
+print_board	print_board.c	/^void print_board(void)  \/\/ge zi$/;"	f
+print_one_chess	print_board.c	/^void print_one_chess (int mx,int my,int q)$/;"	f
+restore_shape	mouse_op.c	/^int restore_shape(int x, int y)$/;"	f
+save_shape	mouse_op.c	/^int save_shape(int x, int y)$/;"	f
+scan_scr	main.c	/^void scan_scr(void)$/;"	f
+shape_save	mouse_op.c	/^static u32_t shape_save[C_WIDTH*C_HEIGHT];$/;"	v	file:
+swap	basic_shape.c	/^void swap(int *a, int*b)$/;"	f
+u32_t	main.h	/^typedef unsigned int u32_t;$/;"	t
+u8_t	main.h	/^typedef unsigned char u8_t;$/;"	t
+v_info_t	main.h	/^}v_info_t;$/;"	t	typeref:struct:__anon2
+w	main.h	/^    int w;$/;"	m	struct:__anon2
+who	mouse_op.c	/^char who = 1;$/;"	v
